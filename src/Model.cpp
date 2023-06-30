@@ -228,7 +228,7 @@ PPM_MODEL::encodeBinSymbol (PPM_CONTEXT * ctxt, int symbol)
 {
   BYTE indx = NS2BSIndx[ctxt->Suffix->NumStats] + PrevSuccess + ctxt->Flags;
   STATE & rs = ctxt->ONESTATE;
-  WORD & bs =
+  WORD bs =
     BinSumm[QTable[rs.Freq - 1]][indx +
 					   ((RunLength >> 26) & 0x20)];
   if (rs.Symbol == symbol)
@@ -257,7 +257,7 @@ PPM_MODEL::decodeBinSymbol (PPM_CONTEXT * ctxt)
 {
   BYTE indx = NS2BSIndx[ctxt->Suffix->NumStats] + PrevSuccess + ctxt->Flags;
   STATE & rs = ctxt->ONESTATE;
-  WORD & bs =
+  WORD bs =
     BinSumm[QTable[rs.Freq - 1]][indx +
 					   ((RunLength >> 26) & 0x20)];
   if (ariGetCurrentShiftCount (TOT_BITS) < bs)
@@ -971,7 +971,7 @@ PPM_MODEL::encodeBinSymbolFixed (PPM_CONTEXT * ctxt, int symbol)
 {
   BYTE indx = NS2BSIndx[ctxt->Suffix->NumStats] + PrevSuccess + ctxt->Flags;
   STATE & rs = ctxt->ONESTATE;
-  WORD & bs =
+  WORD bs =
     BinSumm[QTable[rs.Freq - 1]][indx + ((RunLength >> 26) & 0x20)];
   if (rs.Symbol == symbol)
     {
@@ -1002,7 +1002,7 @@ PPM_MODEL::decodeBinSymbolFixed (PPM_CONTEXT * ctxt)
 {
   BYTE indx = NS2BSIndx[ctxt->Suffix->NumStats] + PrevSuccess + ctxt->Flags;
   STATE & rs = ctxt->ONESTATE;
-  WORD & bs =
+  WORD bs =
     BinSumm[QTable[rs.Freq - 1]][indx +
 					   ((RunLength >> 26) & 0x20)];
   if (ariGetCurrentShiftCount (TOT_BITS) < bs)

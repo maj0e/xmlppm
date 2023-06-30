@@ -664,7 +664,7 @@ main (int argc, char **argv)
   ifclose(state->ifile);
   fclose (args.infp);
   fclose (args.outfp);
-  free (state);
+  delete (state);
 
   return 0;
 }				/* End of main */

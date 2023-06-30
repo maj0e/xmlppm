@@ -48,8 +48,8 @@ extern DWORD low, code, range;
 void ariInitEncoder(FILE* stream);
 
 #define ARI_ENC_NORMALIZE(stream) {                                         \
-    while ((low ^ (low+range)) < TOP || range < BOT &&                      \
-            ((range= -low & (BOT-1)),1)) {                                  \
+    while ((low ^ (low+range)) < TOP || (range < BOT &&                      \
+            ((range= -low & (BOT-1)),1))) {                                  \
         putc(low >> 24,stream);                                             \
         range <<= 8;                                                        \
         low <<= 8;                                                          \
@@ -72,8 +72,8 @@ void ariShiftEncodeSymbol(UINT SHIFT);
       code=(code << 8) | getc(stream);                                      \
 }
 #define ARI_DEC_NORMALIZE(stream) {                                         \
-    while ((low ^ (low+range)) < TOP || range < BOT &&                      \
-            ((range= -low & (BOT-1)),1)) {                                  \
+    while ((low ^ (low+range)) < TOP || (range < BOT &&                      \
+            ((range= -low & (BOT-1)),1))) {                                  \
         code=(code << 8) | getc(stream);                                    \
         range <<= 8;                                                        \
         low <<= 8;                                                          \

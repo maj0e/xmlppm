@@ -39,7 +39,7 @@ extern "C" {
 #endif
 #if defined(__CYGWIN__) || defined (WIN32)
 #define VSNPRINTF(a,b,c,d) _vsnprintf((a),(b),(c),(d))
-#define ICONV(a,b,c,d,e) iconv((a),((const char**)b),(c),(d),(e))
+#define ICONV(a,b,c,d,e) iconv((a),((char**)b),(c),(d),(e))
 #else 
 #define VSNPRINTF(a,b,c,d) vsnprintf((a),(b),(c),(d))
 #define ICONV(a,b,c,d,e) iconv((a),(b),(c),(d),(e))

@@ -90,7 +90,7 @@ void decoderUsage () {
 
 
 FILE *
-fopen_safe (char *filename, char *mode)
+fopen_safe (char *filename, char const *mode)
 {
   FILE *file = fopen (filename, mode);
   if (!file)
