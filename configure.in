@@ -1,0 +1,30 @@
+AC_INIT(xmlppm,0.98.3,james.cheney@gmail.com)
+AM_INIT_AUTOMAKE(xmlppm,0.98.3)
+AC_PROG_RANLIB
+AC_CONFIG_HEADER(config.h)
+AC_CONFIG_SRCDIR([src])
+
+AC_PROG_CC
+AC_PROG_CXX
+
+
+AC_CHECK_LIB([expat],[XML_ExpatVersion])
+AC_CHECK_LIB([iconv],[libiconv])
+AC_CHECK_LIB([c],[libiconv])
+
+AC_HEADER_STDC
+AC_CHECK_HEADERS([fcntl.h stdlib.h string.h])
+
+AC_C_CONST
+AC_C_INLINE
+AC_TYPE_SIZE_T
+
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
+AC_CHECK_FUNCS([memmove memset strdup strerror strrchr])
+
+AC_CONFIG_FILES([src/Makefile])
+
+AC_PROG_MAKE_SET
+AC_PROG_INSTALL
+AC_OUTPUT(Makefile)

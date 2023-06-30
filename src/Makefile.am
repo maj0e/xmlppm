@@ -1,0 +1,9 @@
+bin_PROGRAMS = xmlppm xmlunppm
+xmlppm_SOURCES = xmlppm.cpp Args.cpp Args.h Version.h
+xmlppm_LDADD = libxmlppm.a 
+AM_CFLAGS = -Wall -ansi -pedantic -Wno-sign-compare -Wno-unknown-pragmas -Wno-conversion
+AM_CXXFLAGS = -fno-exceptions -fno-rtti -fcheck-new -Wall -ansi -pedantic -Wno-sign-compare -Wno-unknown-pragmas -Wno-conversion
+xmlunppm_SOURCES = xmlunppm.cpp Args.cpp Args.h Version.h
+xmlunppm_LDADD = libxmlppm.a
+lib_LIBRARIES = libxmlppm.a 
+libxmlppm_a_SOURCES = Coder.cpp Coder.h Model.cpp Model.h PrintSax.cpp PrintSax.h EncodeSax.cpp EncodeSax.h StringArray.cpp StringArray.h XmlModel.cpp XmlModel.h IFile.cpp IFile.h SubAlloc.hpp PPMdType.h DecodeSax.cpp DecodeSax.h

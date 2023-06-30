@@ -1,0 +1,228 @@
+XMLPPM 0.98 README
+
+James Cheney 2/26/2008
+
+ABOUT XMLPPM
+
+This directory contains version 0.98.3 of XMLPPM, an XML-specific compressor.
+XMLPPM reads well-formed XML text from standard input or a provided XML
+file, compresses it, and sends the compressed bits to standard output or
+a file whose name is extended with ".xpm".  The companion decompressor,
+XMLUNPPM, restores the text version of the XML data from the compressed
+bits.  (Actually, the restored version might be slightly different,
+for example, some whitespace might be stripped, and empty element tags
+like <a/> might be expanded to <a></a>).
+
+This version of XMLPPM is *beta*.  It incorporates many improvements
+over previous versions of XMLPPM, including:
+
+* Improved decompression speed
+
+* Several nasty bugs have been fixed
+
+One of the bugs fiuxed was in the encoding.  Therefore, XMLPPM 0.98 uses a slightly different encoding than previous versions.
+
+*** WARNING ***
+
+XMLPPM 0.98 is not backwards compatible with previous versions.
+
+Files encoded with previous versions of XMLPPM should be decoded
+and re-compressed using XMLPPM 1.98, or, eve, better, restored from
+originals. ***
+
+I plan to stick with the encoding used in XMLPPM for a while and try to
+make the program itself usable and useful.  However, since there's a new
+version of the XML standard out, it may be that I'll have to change the
+encoding in an upcoming version to handle XML 1.1.  Therefore, I cannot
+yet recommend xmlppm as a stable compression format.
+
+COPYRIGHT and LICENSE TERMS
+
+Portions of this version of the XMLPPM source code compressor are
+based on Dmitri Shkarin's sources for PPMDI.  This code is used and
+placed under the GPL with permission.  Those files are copyright their
+respective authors as described in the source files.  The modifications
+to PPMDI and the rest of the XMLPPM source code is copyright James Cheney,
+November 2000 and February 2003.
+
+Previous versions of XMLPPM were based on Alistair Moffat's arithmetic
+coding sources, Bill Teahan's sources for the PPMD+ text compressor,
+and DMitry Shkarin's PPMDG compressor.  That code was placed under the
+GPL with permission also, but is no longer part of XMLPPM.  Many thanks
+to Alistair and Bill.
+
+This code is covered by the Gnu Public License.
+
+COMPILING XMLPPM
+
+XMLPPM uses version 1.95 of the "expat" XML parser, and so you need to
+get and install the development version of that parser before you can
+compile XMLPPM.  It also uses libiconv, a library for converting among
+character encodings, in order to decompress XML files back to the same
+encoding they were originally compressed in (expat normalizes to UTF-8).
+
+Expat (and the installation instructions whereof) is available at:
+http://expat.sourceforge.net/.  You need both the shared library and
+the headers to compile XMLPPM.  You can also get these as RPMs from
+http://www.rpmfind.net, by searching for "expat" and "expat-devel".
+
+XMLPPM is known to compile under Fedora, Ubuntu, and Cygwin.
+  
+
+Once you have installed the necessary libraries,
+it should suffice to do:
+
+$ ./configure
+$ make all
+$make install 
+
+This should create two binary files, xmlppm and xmlunppm.
+
+Because XMLPPM is beta software, I don't recommend performing further
+installation steps like putting xmlppm in /usr/bin, because then other
+users of your machine might think it's a "real" (i.e. fully tested)
+utility.
+
+
+COMPILING UNDER WINDOWS
+
+should be possible using Visual Studio, but I haven't tried in a long time.
+
+
+COMPILING UNDER WINDOWS WITH CYGWIN
+
+should work fine, using the configuration scripts.
+
+
+USING XMLPPM
+
+XMLPPM and its companion decompressor XMLUNPPM are command-line driven.
+Also, XMLPPM only reads and compresses XML text files.  What counts as
+an XML text file actually depends on the underlying XML parser, expat;
+if expat does not know how to parse a document, XMLPPM will print expat's
+error message and quit.  If XMLPPM spits out an XML parsing error and
+won't compress your (well-formed) document, it's more likely a problem
+in expat, not in XMLPPM, so I may not be able to do anything about it.
+
+
+Supposing you do have an XML file that expat likes, to compress it do
+one of the following:
+
+./xmlppm < doc.xml > doc.xml.xppm
+
+./xmlppm doc.xml
+
+./xmlppm doc.xml doc.xpm
+
+The first form reads from stdin and writes to stdout; the second reads
+from the provided file and writes to the same filename plus ".xpm",
+and the third reads from the first file and writes to the second.
+
+To expand the compressed document, do one of the following:
+
+./xmlunppm < doc.xml.xppm > doc.new.xml
+
+./xmlunppm doc.xml.xpm
+
+./xmlunppm doc.xpm doc.xml
+
+You can install xmlppm and xmlunppm to a target directory like
+/usr/local/bin by setting the INSTALLDIR line in the Makefile to something
+appropriate and doing "make install".
+
+INTERNALTIONALIZATION ISSUES
+
+Expat, the XML parser used by XMLPPM, normalizes all test to UTF-8.
+In earlier versions of XMLPPM, this had the annoying consequence that
+files uncompressed to UTF-8, no matter what the input encoding was.  Now,
+XMLPPM uses libiconv, an i18n library, to translate back to the original
+encoding.  To get this right, you may need to add an explicit header
+
+<?xml version="1.x" encoding="<encoding>"?>
+
+to the beginning of your XML source files.  This is good practice anyway;
+the annoyance of having to repeatedly write the header should be repaid
+by the fact that nice standard-compliant tools like XMLPPM do not barf
+on your files.
+
+If your preferred encoding is UTF-8 (or as a subset, ASCII), then
+you do not need to worry about this.  However, if  your source file
+uses another encoding, then you will have to declare the encoding in a
+header in order to avoid problems.  Specifically, your file may fail to
+compress, or it may compress fine (because Expat is smart and forgiving
+about missing encoding headers) but fail to decompress because of an
+"illegal multiple byte character encoding" errors.  This is generally
+a signal that you should add an "encoding" header.
+
+A future version might include a command line option for forcing the
+correct encoding setting, if this turns out to be needed.
+
+NEW IN VERSION 0.98.3
+
+Several bugs in the encoding have been fixed, mostly to do with large
+blocks of text and corner cases such as empty attribute names.
+
+NEW IN VERSION 0.98
+
+Buffering for the internationalization-conversion stage has been added
+to improve decompression speed.
+
+Some minor and major bugs have been fixed; see the BUGS file.
+
+NEW IN VERSION 0.97
+
+Added a command-line switch, -s (for (s)tandalone) that turns off
+external entity parsing, even if external entities are referenced by
+the XML document.  This makes it possible to compress a document that
+refers to files that are not present.  However, if such entities define
+names used in the xml document, this will result in errors because the
+parser won't see the names.
+
+Replaced the old PPMD+ and PPMDG encoders with Dmitry Shkarin's PPMDI,
+which is faster than PPMD+ and bzip2, yet results in better XML
+compression.  Using PPMDI, XMLPPM gets pretty close to the benchmark
+achieved by the XMLPPM+PPM* encoder, but at least an order of magnitude
+faster.  This version of XMLPPM is not as fast as gzip, but remember,
+we're parsing the XML document also (and compressing it about 1.5-2x
+better than gzip)
+
+XMLPPM now takes care to respect the "encoding" attribute in the source
+XML document.  Compressing documents in other encodings presented no
+problem, because expat supports parsing documents in such encodings.
+However, previous versions of XMLPPM produced UTF-8 output, without
+updating the encoding tag, resulting in gibberish for encodings
+that (unlike the author's native ASCII) do not coincide with UTF-8.
+This version uses libiconv to convert the document text back to its
+original encoding.
+
+NEW IN VERSION 0.96.2
+
+Version 0.96.1 fixed the Windows version to use the current expat
+library name.  Version 0.96.2 introduces better command line argument
+handling as described above, plus the ability to compress/decompress
+from/to stdin/stdout.
+
+Version 0.96.2 also features the ability to compress XML files that refer
+to external parsed entities (like DTDs, or XML snippets.)  Currently,
+the only way to do this is if all of the external entities are in the
+same directory as the file to be compressed; only the document entity
+(that is, the toplevel XML document) will be compressed.  Thus, the
+external entities must also be present when the document is decompressed.
+
+
+NEW IN VERSION 0.96
+
+The original version, 0.95, is in the src/ subdirectory.  Expect this
+to go away.  The new version, 0.96, is in the xmlppmdg/ subdirectory.
+This version uses a much faster, more efficient, and more effective
+implementation of the PPM algorithm, called PPMDG, by Dmitri Shkarin.
+The resulting XML compressor is within a factor of 2 of the speed of
+gzip, faster than bzip2, and compresses better than either (and also
+better than 0.95 xmlppm).
+
+
+
+CONTACT
+
+James Cheney, james.cheney@gmail.com
+

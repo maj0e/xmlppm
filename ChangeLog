@@ -1,0 +1,9 @@
+2/14/08
+
+Added ability to specify an XML file to "learn" (using -m) before compressing the main file
+
+Also, -f flag tells model to "freeze" after learning the XML file specified with -m
+
+2/26/08
+
+Corrected a number of bugs in the encoding, having to do with corner cases like empty attribute strings and long (>20KB) character content.

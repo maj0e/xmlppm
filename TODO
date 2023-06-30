@@ -1,0 +1,47 @@
+XMLPPM 0.98 TODO
+
+James Cheney 3/19/2001
+
+* Fix the entity behavior so that the XML text is preserved as exactly
+as possible
+
+* Factor the XMLUNPPM component into an "event decoder" that decodes the
+compressed event stream and calls an arbitrary SAX event handler, and a 
+"printing" event handler.
+
+* Port to other XML parsing libraries
+
+* Add the capability to directly compress/decompress XML stored in memory
+as DOM trees
+
+5/19/2001
+
+* Remove 255-element/attribute symbol limitation
+
+
+2/11/2003
+
+* Library-ize xmlppm so that applications can compress XML text or DOM
+trees from memory to memory rather than only to/from files.
+
+
+5/6/2006
+
+* Use autoconf/automake to detect whether xerces, expat, or libxml2 is installed and provide appropriate interfaces.
+
+* Provide callback and buffer-based processing options to enable compressing xml text from/to memory rather than files.
+
+* Use Xerces-C++ SAX/DOM abstractions to simplify the above?
+
+* Provide JNI-binding?
+
+
+Library plan:
+
+1.  Abstract method of outputing compressed byte stream out of PPM models/coder.
+
+2.  Provide compression and decompression as a C++-like class/component.
+
+3.  Provide C external interfaces.  Can C code call C++ code?
+
+
