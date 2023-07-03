@@ -38,7 +38,7 @@ extern "C"
 {
 #if defined(__CYGWIN__)
   int _setmode (int handle, int mode);
-  int _fileno (FILE * stream);
+  int _fileno (FILE * stream) { return fileno(stream); };
 #endif
   char *strdup (const char *);
 }
