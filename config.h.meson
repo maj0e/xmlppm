@@ -1,0 +1,105 @@
+/* config.h.in.  Generated from configure.in by autoheader.  */
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#mesondefine HAVE_FCNTL_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#mesondefine HAVE_INTTYPES_H
+
+/* Define to 1 if you have the `c' library (-lc). */
+#mesondefine HAVE_LIBC
+
+/* Define to 1 if you have the `expat' library (-lexpat). */
+#mesondefine HAVE_LIBEXPAT
+
+/* Define to 1 if you have the `iconv' library (-liconv). */
+#mesondefine HAVE_LIBICONV
+
+/* Define to 1 if your system has a GNU libc compatible `malloc' function, and
+   to 0 otherwise. */
+#mesondefine HAVE_MALLOC
+
+/* Define to 1 if you have the `memmove' function. */
+#mesondefine HAVE_MEMMOVE
+
+/* Define to 1 if you have the <memory.h> header file. */
+#mesondefine HAVE_MEMORY_H
+
+/* Define to 1 if you have the `memset' function. */
+#mesondefine HAVE_MEMSET
+
+/* Define to 1 if your system has a GNU libc compatible `realloc' function,
+   and to 0 otherwise. */
+#mesondefine HAVE_REALLOC
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#mesondefine HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#mesondefine HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strdup' function. */
+#mesondefine HAVE_STRDUP
+
+/* Define to 1 if you have the `strerror' function. */
+#mesondefine HAVE_STRERROR
+
+/* Define to 1 if you have the <strings.h> header file. */
+#mesondefine HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#mesondefine HAVE_STRING_H
+
+/* Define to 1 if you have the `strrchr' function. */
+#mesondefine HAVE_STRRCHR
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#mesondefine HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#mesondefine HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#mesondefine HAVE_UNISTD_H
+
+/* Name of package */
+#mesondefine PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#mesondefine PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#mesondefine PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#mesondefine PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#mesondefine PACKAGE_TARNAME
+
+/* Define to the version of this package. */
+#mesondefine PACKAGE_VERSION
+
+/* Define to 1 if you have the ANSI C header files. */
+#mesondefine STDC_HEADERS
+
+/* Version number of package */
+#mesondefine VERSION
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#mesondefine const
+
+/* Define to `__inline__' or `__inline' if that's what the C compiler
+   calls it, or to nothing if 'inline' is not supported under any name.  */
+#ifndef __cplusplus
+#mesondefine inline
+#endif
+
+/* Define to rpl_malloc if the replacement function should be used. */
+#mesondefine malloc
+
+/* Define to rpl_realloc if the replacement function should be used. */
+#mesondefine realloc
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#mesondefine size_t
